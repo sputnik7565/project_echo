@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Echo - Reports</title>
+</head>
+<body>
+    <h1>All Reports</h1>
+    <ul>
+        {% for report in reports %}
+            <li>
+                <a href="{% url 'reports:report_detail' report.id %}">
+                    Report for {{ report.brand.name }} on {{ report.created_at|date:"Y-m-d" }}
+                </a>
+            </li>
+        {% empty %}
+            <li>No reports available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

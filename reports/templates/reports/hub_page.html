@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Echo - 리포트 허브</title>
+    <style>
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; padding: 0; background-color: #f9fafb; color: #1f2937; line-height: 1.7; }
+        .container { max-width: 1100px; margin: 40px auto; background: #ffffff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb; }
+        .header h1 { font-size: 2.8em; font-weight: 800; color: #111827; margin: 0; }
+        .header p { font-size: 1.2em; color: #6b7280; margin-top: 8px; }
+
+        .section-title { font-size: 2.2em; font-weight: 700; color: #1e3a8a; border-bottom: 4px solid #3b82f6; padding-bottom: 15px; margin-bottom: 30px; }
+
+        .card { background-color: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: box-shadow 0.3s ease; }
+        .card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        
+        .card-title { font-size: 1.3em; font-weight: 600; color: #1e40af; margin-bottom: 12px; }
+        .card p { margin: 0; font-size: 1.05em; }
+
+        .button-group { display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+        .button { display: inline-block; padding: 15px 30px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1em; transition: background-color 0.3s ease; }
+        .button:hover { background-color: #2563eb; }
+        .button-secondary { background-color: #6b7280; }
+        .button-secondary:hover { background-color: #4b5563; }
+
+        .report-list { list-style: none; padding: 0; }
+        .report-list li { margin-bottom: 15px; display: flex; align-items: center; }
+        .report-item-link { flex-grow: 1; padding: 20px; background-color: #f3f4f6; border-radius: 10px; text-decoration: none; color: #1f2937; font-size: 1.1em; font-weight: 500; transition: background-color 0.3s ease; }
+        .report-item-link:hover { background-color: #e5e7eb; }
+        .report-item-link span { color: #6b7280; font-size: 0.9em; margin-left: 10px; }
+
+        .download-button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .download-button:hover {
+            background-color: #059669;
+        }
+
+        .delete-button {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .delete-button:hover {
+            background-color: #dc2626;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #374151; }
+        .form-group input[type="text"] {
+            width: calc(100% - 24px); /* Adjust for padding */
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .form-group input[type="text"]:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); }
+
+        #progress-display {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e0f2f7;
+            border: 1px solid #b2ebf2;
+            color: #00796b;
+            font-weight: 600;
+            display: none; /* Hidden by default */
+        }
+        #progress-display.error {
+            background-color: #ffebee;
+            border-color: #ef9a9a;
+            color: #c62828;
+        }
+        #progress-display.success {
+            background-color: #e8f5e9;
+            border-color: #a5d6a7;
+            color: #2e7d32;
+        }
+        /* Toast message styles */
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1000;
+            font-size: 0.9em;
+        }
+        .toast-message.show {
+            opacity: 1;
+        }
+        .toast-message.success {
+            background-color: #4CAF50; /* Green */
+        }
+        .toast-message.error {
+            background-color: #f44336; /* Red */
+        }
+        .persona-description {
+            color: #ef4444; /* Red color */
+            font-size: 0.9em;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Project Echo - 리포트 허브</h1>
+            <p>디지털 마케팅 성과 보고서 관리 및 확인</p>
+        </div>
+
+        <div class="report-section">
+            <h2 class="section-title">리포트 생성</h2>
+            <div class="card">
+                <p class="card-title">새로운 리포트 생성</p>
+                <p>분석을 원하는 브랜드 정보와 타겟 페르소나 키워드를 입력하여 새로운 디지털 마케팅 성과 리포트를 생성합니다.</p>
+                <form id="report-generation-form" action="{% url 'reports:generate_report' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="client_brand">메인 브랜드명:</label>
+                        <input type="text" id="client_brand" name="client_brand" placeholder="예: 레어로우" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competitor_brand">경쟁 브랜드명:</label>
+                        <input type="text" id="competitor_brand" name="competitor_brand" placeholder="예: 몬스트럭쳐" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="target_persona_keywords">타겟 페르소나 키워드:
+                            <span class="persona-description">(AI 분석 및 전략 제언에 활용될 고객 특징 키워드)</span>
+                        </label>
+                        <input type="text" id="target_persona_keywords" name="target_persona_keywords" placeholder="예: 신혼부부,인테리어,가구 (쉼표로 구분)" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="button" id="generate-report-button">리포트 생성 시작</button>
+                    </div>
+                </form>
+                <div id="progress-display" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="report-section">
+            <h2 class="section-title">리포트 관리</h2>
+            <div class="card">
+                <p class="card-title">보고 주기 설정</p>
+                <p>정기 리포트 생성 주기를 설정합니다. (예: 매주 월요일 오전 9시)</p>
+                <div class="button-group">
+                    <a href="#" class="button button-secondary">설정 변경 (준비 중)</a>
+                </div>
+            </div>
+            <div class="card">
+                <p class="card-title">관리자 페이지</p>
+                <p>데이터베이스 및 시스템 설정을 관리합니다.</p>
+                <div class="button-group">
+                    <a href="/admin/" class="button" target="_blank">관리자 페이지 접속</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-section">
+            <h2 class="section-title">생성된 리포트</h2>
+            {% if reports %}
+            <ul class="report-list">
+                {% for report in reports %}
+                <li id="report-item-{{ report.id }}">
+                    <a href="{% url 'reports:report_detail' report.id %}" class="report-item-link">
+                        {{ report.brand.name }} 리포트 - {{ report.report_date|date:"Y년 n월 j일" }}
+                        <span>(생성일: {{ report.created_at|date:"Y.m.d H:i" }})</span>
+                    </a>
+                    <a href="{% url 'reports:report_pdf' report.id %}" class="download-button" target="_blank">PDF</a>
+                    <a href="{% url 'reports:download_markdown_report' report.id %}" class="download-button" target="_blank">MD</a>
+                    <button class="delete-button" data-report-id="{{ report.id }}">삭제</button>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="card">
+                <p>아직 생성된 리포트가 없습니다. 새로운 리포트를 생성해주세요.</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div id="toast-message" class="toast-message"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('report-generation-form');
+            const generateButton = document.getElementById('generate-report-button');
+            const progressDisplay = document.getElementById('progress-display');
+            const toastMessageDiv = document.getElementById('toast-message');
+            let progressInterval;
+
+            // Function to get CSRF token
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            const csrftoken = getCookie('csrftoken');
+
+            // Function to show toast message
+            function showToast(message, type = 'info') {
+                toastMessageDiv.textContent = message;
+                toastMessageDiv.className = 'toast-message show '; // Reset and add show class
+                if (type === 'success') {
+                    toastMessageDiv.classList.add('success');
+                } else if (type === 'error') {
+                    toastMessageDiv.classList.add('error');
+                }
+                setTimeout(() => {
+                    toastMessageDiv.classList.remove('show');
+                }, 3000); // Hide after 3 seconds
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                generateButton.disabled = true;
+                progressDisplay.style.display = 'block';
+                progressDisplay.className = ''; // Clear previous classes
+                progressDisplay.textContent = '리포트 생성 요청 중...';
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const taskId = data.task_id;
+                        progressDisplay.textContent = data.message + ' (ID: ' + taskId + ')';
+                        startPolling(taskId);
+                    } else {
+                        progressDisplay.classList.add('error');
+                        progressDisplay.textContent = '오류: ' + data.message;
+                        generateButton.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    progressDisplay.classList.add('error');
+                    progressDisplay.textContent = '리포트 생성 요청 중 네트워크 오류가 발생했습니다.';
+                    generateButton.disabled = false;
+                });
+            });
+
+            function startPolling(taskId) {
+                progressInterval = setInterval(() => {
+                    fetch(`/get_report_progress/?task_id=${taskId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'completed') {
+                                progressDisplay.classList.add('success');
+                                progressDisplay.textContent = data.message + ' 페이지를 새로고침하여 리포트를 확인하세요.';
+                                clearInterval(progressInterval);
+                                generateButton.disabled = false;
+                                // Optionally, refresh the page or update the report list
+                                setTimeout(() => location.reload(), 2000); 
+                            } else if (data.status === 'failed') {
+                                progressDisplay.classList.add('error');
+                                progressDisplay.textContent = data.message;
+                                clearInterval(progressInterval);
+                                generateButton.disabled = false;
+                            } else {
+                                progressDisplay.textContent = data.message + ' (' + data.stage + ')';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Polling error:', error);
+                            progressDisplay.classList.add('error');
+                            progressDisplay.textContent = '진행 상황을 가져오는 중 오류가 발생했습니다.';
+                            clearInterval(progressInterval);
+                            generateButton.disabled = false;
+                        });
+                }, 2000); // Poll every 2 seconds
+            }
+
+            // Delete Report functionality
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const reportId = this.dataset.reportId;
+                    if (confirm('정말로 이 리포트를 삭제하시겠습니까?')) {
+                        fetch(`/reports/${reportId}/delete/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRFToken': csrftoken,
+                                'Content-Type': 'application/json' // Important for Django's CSRF to work with non-form data
+                            },
+                            body: JSON.stringify({})
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                document.getElementById(`report-item-${reportId}`).remove();
+                                showToast(data.message, 'success');
+                            } else {
+                                showToast('리포트 삭제 실패: ' + data.message, 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Delete error:', error);
+                            showToast('리포트 삭제 중 네트워크 오류가 발생했습니다.', 'error');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
