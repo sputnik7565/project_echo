@@ -70,7 +70,7 @@ def download_markdown_report(request, report_id):
     report = get_object_or_404(Report, pk=report_id)
     markdown_content = _json_to_markdown(report.report_data)
     
-    response = HttpResponse(markdown_content, content_type='text/markdown')
+    response = HttpResponse(markdown_content, content_type='text/markdown; charset=utf-8')
     response['Content-Disposition'] = f'attachment; filename="{report.brand.name}_{report.report_date.strftime("%Y%m%d")}.md"'
     return response
 

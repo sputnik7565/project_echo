@@ -20,10 +20,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Nginx의 proxy_set_header X-Forwarded-Proto $scheme; 설정을 활용
-USE_X_FORWARDED_HOST = True
-# 또는 스크립트 이름을 강제로 지정
-FORCE_SCRIPT_NAME = '/echo'
+# # Nginx의 proxy_set_header X-Forwarded-Proto $scheme; 설정을 활용
+# USE_X_FORWARDED_HOST = True
+# # 또는 스크립트 이름을 강제로 지정
+# FORCE_SCRIPT_NAME = '/echo'
 
 
 # Quick-start development settings - unsuitable for production
@@ -127,6 +127,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # For collectstatic
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'reports', 'static'),
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
