@@ -20,6 +20,12 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Nginx의 proxy_set_header X-Forwarded-Proto $scheme; 설정을 활용
+USE_X_FORWARDED_HOST = True
+# 또는 스크립트 이름을 강제로 지정
+FORCE_SCRIPT_NAME = '/echo'
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
