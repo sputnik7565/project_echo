@@ -37,10 +37,12 @@
             color: white;
             border: none;
             border-radius: 8px;
-            padding: 10px 15px;
+            padding: 20px 15px;
             margin-left: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 1.1em;
+            line-height: 1.5;
             transition: background-color 0.3s ease;
         }
         .download-button:hover {
@@ -52,10 +54,12 @@
             color: white;
             border: none;
             border-radius: 8px;
-            padding: 10px 15px;
+            padding: 20px 15px;
             margin-left: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 1.1em;
+            line-height: 1.5;
             transition: background-color 0.3s ease;
         }
         .delete-button:hover {
@@ -124,6 +128,85 @@
             margin-left: 5px;
             font-weight: normal;
         }
+        /* Mobile-specific styles */
+        @media screen and (max-width: 768px) {
+            .container {
+                max-width: 100%; /* Allow full width */
+                margin: 20px; /* Smaller margin on sides */
+                padding: 20px; /* Smaller padding */
+                border-radius: 8px; /* Slightly smaller border-radius */
+            }
+
+            .header h1 {
+                font-size: 2em; /* Smaller font size for mobile */
+            }
+
+            .header p {
+                font-size: 1em; /* Smaller font size */
+            }
+
+            .section-title {
+                font-size: 1.8em; /* Smaller font size */
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+
+            .card {
+                padding: 15px; /* Smaller padding inside cards */
+                margin-bottom: 15px; /* Smaller margin between cards */
+            }
+
+            .card-title {
+                font-size: 1.1em; /* Smaller font size */
+                margin-bottom: 8px;
+            }
+
+            .card p {
+                font-size: 0.95em; /* Smaller font size */
+            }
+
+            .button-group {
+                flex-direction: column; /* Stack buttons vertically */
+                gap: 10px; /* Smaller gap */
+            }
+
+            .button {
+                padding: 12px 20px; /* Smaller padding for buttons */
+                font-size: 1em; /* Smaller font size */
+                width: 100%; /* Full width buttons */
+                box-sizing: border-box; /* Ensure padding is included in width */
+            }
+
+            .report-list li {
+                flex-direction: column; /* Stack items vertically */
+                align-items: flex-start; /* Align items to the start */
+                margin-bottom: 10px; /* Smaller margin */
+            }
+
+            .report-item-link {
+                width: 100%; /* Full width link */
+                padding: 15px; /* Smaller padding */
+                font-size: 1em; /* Smaller font size */
+                margin-bottom: 10px; /* Space between link and buttons */
+                box-sizing: border-box;
+            }
+
+            .report-item-link span {
+                display: block; /* Make date span a block element */
+                margin-left: 0; /* Remove left margin */
+                margin-top: 5px; /* Add top margin */
+            }
+
+            .download-button,
+            .delete-button {
+                width: 100%; /* Full width buttons */
+                margin-left: 0; /* Remove left margin */
+                margin-top: 5px; /* Add top margin */
+                box-sizing: border-box;
+                padding: 10px 15px; /* Smaller padding for mobile buttons */
+                text-align: center; /* Center text */
+            }
+        }
     </style>
 </head>
 <body>
@@ -171,13 +254,7 @@
                     <a href="#" class="button button-secondary">설정 변경 (준비 중)</a>
                 </div>
             </div>
-            <div class="card">
-                <p class="card-title">관리자 페이지</p>
-                <p>데이터베이스 및 시스템 설정을 관리합니다.</p>
-                <div class="button-group">
-                    <a href="/admin/" class="button" target="_blank">관리자 페이지 접속</a>
-                </div>
-            </div>
+            
         </div>
 
         <div class="report-section">
@@ -192,7 +269,7 @@
                     </a>
                     <a href="{% url 'reports:report_pdf' report.id %}" class="download-button" target="_blank">PDF</a>
                     <a href="{% url 'reports:download_markdown_report' report.id %}" class="download-button" target="_blank">MD</a>
-                    <button class="delete-button" data-report-id="{{ report.id }}">삭제</button>
+                    <button class="delete-button" data-report-id="{{ report.id }}">Delete</button>
                 </li>
                 {% endfor %}
             </ul>
