@@ -11,14 +11,14 @@
     <div class="container">
         <div class="header">
             <h1>Project Echo - 리포트 허브</h1>
-            <p>디지털 마케팅 성과 보고서 관리 및 확인</p>
+            <p>디지털 마케팅 현황 보고서 관리 및 확인(주간 단위)</p>
         </div>
 
         <div class="report-section">
             <h2 class="section-title">리포트 생성</h2>
             <div class="card">
                 <p class="card-title">새로운 리포트 생성</p>
-                <p>분석을 원하는 브랜드 정보와 타겟 페르소나 키워드를 입력하여 새로운 디지털 마케팅 성과 리포트를 생성합니다.</p>
+                <p>분석을 원하는 브랜드 정보와 타겟 페르소나 키워드를 입력하여 새로운 디지털 마케팅 현황 리포트를 생성합니다.</p>
                 <form id="report-generation-form" action="{% url 'reports:generate_report' %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="report-section">
+        {% comment %} <div class="report-section">
             <h2 class="section-title">리포트 관리</h2>
             <div class="card">
                 <p class="card-title">보고 주기 설정</p>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             
-        </div>
+        </div> {% endcomment %}
 
         <div class="report-section">
             <h2 class="section-title">생성된 리포트</h2>
@@ -66,7 +66,7 @@
                         <span>(생성일: {{ report.created_at|date:"Y.m.d H:i" }})</span>
                     </a>
                     <div class="report-actions">
-                        <a href="{% url 'reports:report_pdf' report.id %}" class="download-button" target="_blank">PDF</a>
+                                                {# <a href="{% url 'reports:report_pdf' report.id %}" class="download-button" target="_blank">PDF</a> #}
                         <a href="{% url 'reports:download_markdown_report' report.id %}" class="download-button" target="_blank">MD</a>
                         <button class="delete-button" data-report-id="{{ report.id }}">Delete</button>
                     </div>
@@ -85,5 +85,8 @@
     <div id="toast-message" class="toast-message"></div>
 
     <script src="{% static 'reports/js/hub_page.js' %}"></script>
+    <footer style="text-align: center; margin-top: 50px; padding: 20px; color: #6b7280; font-size: 0.9em;">
+        2025 Copyrights &copy;SPUTLAB All Rights Reserved.
+    </footer>
 </body>
 </html>

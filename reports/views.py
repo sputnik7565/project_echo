@@ -96,8 +96,12 @@ def report_pdf(request, report_id):
     html = template.render(context)
     
     # Pass base_url to HTML to correctly resolve static and media files
-    pdf_file = HTML(string=html, base_url=request.build_absolute_uri()).write_pdf()
-
-    response = HttpResponse(pdf_file, content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="report_{report.brand.name}_{report.report_date.strftime("%Y%m%d")}.pdf"'
-    return response
+    try:
+        pdf_file = HTML(string=html, base_url=request.build_absolute_uri()).write_pdf()
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="report_{report.brand.name}_{report.report_date.strftime("%Y%m%d")}.pdf"'
+        return response
+    except Exception as e:
+        # Log the error for debugging purposes
+        print(f"Error generating PDF: {e}")
+        return HttpResponse(f"PDF 생성 중 오류가 발생했습니다: {e}", status=500)

@@ -12,7 +12,7 @@ class ChartService:
         self.charts_dir = os.path.join(settings.MEDIA_ROOT, 'charts')
         os.makedirs(self.charts_dir, exist_ok=True)
         # 한글 폰트 설정
-        plt.rcParams['font.family'] = 'AppleGothic' # Adjust as needed for your OS
+        plt.rcParams['font.family'] = 'Pretendard' # Adjust as needed for your OS
         plt.rcParams['axes.unicode_minus'] = False
         plt.rcParams['font.size'] = 12 # Default font size
         plt.rcParams['axes.titlesize'] = 14 # Title font size

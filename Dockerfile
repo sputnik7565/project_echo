@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . /app/
 
 # 4. 시스템 패키지 및 Python 의존성 설치
-RUN apt-get update   && apt-get install -y --no-install-recommends gcc python3-dev libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 libffi-dev shared-mime-info   && rm -rf /var/lib/apt/lists/*
+RUN apt-get update   && apt-get install -y --no-install-recommends gcc python3-dev libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 libffi-dev shared-mime-info fonts-nanum   && rm -rf /var/lib/apt/lists/*   && fc-cache -fv
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 5. Entrypoint 스크립트 복사 및 권한 설정

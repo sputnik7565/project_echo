@@ -2,13 +2,13 @@
 
 /* --- 1. Global & Root Variables --- */
 :root {
-    --primary-color: #3b82f6;
-    --primary-deep-color: #1e3a8a;
-    --headline-bg-color: #eef2ff;
-    --headline-text-color: #312e81;
+    --primary-color: #606060;
+    --primary-deep-color: #1f2937;
+    --headline-bg-color: #f9f5ff;
+    --headline-text-color: #8854d0;
 
-    --priority-1-color: #be123c;
-    --priority-2-color: #ea580c;
+    --priority-1-color: #fc5c65;
+    --priority-2-color: #fd9644;
 
     --text-primary: #1f2937;
     --text-secondary: #4b5563;

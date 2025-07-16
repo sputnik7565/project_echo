@@ -10,6 +10,6 @@ urlpatterns = [
     path('reports/', views.report_list, name='report_list'),
     path('reports/<int:report_id>/', views.report_detail, name='report_detail'),
     path('reports/<int:report_id>/delete/', views.delete_report, name='delete_report'), # New URL for deleting reports
-    path('reports/<int:report_id>/pdf/', views.report_pdf, name='report_pdf'),
+    # path('reports/<int:report_id>/pdf/', views.report_pdf, name='report_pdf'),
     path('reports/<int:report_id>/download_md/', views.download_markdown_report, name='download_markdown_report'), # New URL for downloading markdown reports
 ]

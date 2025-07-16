@@ -2,14 +2,14 @@
 
 /* --- 1. Global & Root Variables --- */
 :root {
-    --primary-color: #3b82f6;
-    --primary-hover-color: #2563eb;
+    --primary-color: #a55eea;
+    --primary-hover-color: #8854d0;
     --secondary-color: #6b7280;
     --secondary-hover-color: #4b5563;
-    --danger-color: #ef4444;
-    --danger-hover-color: #dc2626;
-    --success-color: #10b981;
-    --success-hover-color: #059669;
+    --danger-color: #fc5c65;
+    --danger-hover-color: #eb3b5a;
+    --success-color: #778ca3;
+    --success-hover-color: #4b6584;
 
     --text-primary: #1f2937;
     --text-secondary: #4b5563;
