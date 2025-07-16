@@ -7,8 +7,6 @@ db.sqlite3
 # Environment variables
 .env
 
-.DS_Store
-
 # Django static files
 staticfiles/
 

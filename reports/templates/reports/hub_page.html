@@ -4,11 +4,335 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Echo - 리포트 허브</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'reports/css/hub_page.css' %}">
+    <style>
+        /* Content from hub_page.css */
+        /* Filename: hub_page.css */
+
+/* --- 0. Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap');
+
+/* --- 1. Global & Root Variables --- */
+:root {
+    /* New Unified Color Palette */
+    --primary-color: #3b82f6;           /* Main Blue */
+    --primary-hover-color: #2563eb;     /* Darker Blue for hover */
+    --secondary-color: #6b7280;         /* Neutral Gray */
+    --secondary-hover-color: #4b5563;   /* Darker Gray for hover */
+    --danger-color: #ef4444;            /* Red for Delete/Danger */
+    --danger-hover-color: #dc2626;      /* Darker Red for hover */
+    --success-color: #10b981;           /* Green for Download/Success */
+    --success-hover-color: #059669;      /* Darker Green for hover */
+
+    --text-primary: #1f2937;            /* Main text color (almost black) */
+    --text-secondary: #4b5563;          /* Secondary text color */
+    --text-light: #6b7280;              /* Lighter text for metadata */
+    --border-color: #e5e7eb;            /* Light gray for borders */
+    --background-light: #f9fafb;        /* Very light gray for page background */
+    --background-white: #ffffff;        /* White for cards */
+
+    /* Font System Update */
+    --font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --border-radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('https://fonts.gstatic.com/s/notosanskr/v20/KFOlCnqEu92Fr1Mu51QrEzAd.woff2') format('woff2');
+    font-weight: 400 800;
+    font-display: swap;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+
+/* --- 2. Layout --- */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px 40px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+}
+
+.header p {
+    font-size: 1.1em;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.report-section {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* --- 3. Components: Card, Form, Button --- */
+.card {
+    background-color: var(--background-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+}
+
+.card p {
+    margin: 0;
+    font-size: 1em;
+    color: var(--text-secondary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.persona-description {
+    color: var(--text-light);
+    font-size: 0.9em;
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+.button-secondary {
+    background-color: var(--secondary-color);
+}
+.button-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+/* 준비중인 버튼은 비활성화된 것처럼 보이게 처리 */
+.button-secondary[href="#"] {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+}
+
+/* --- 4. Report List --- */
+.report-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.report-list li {
+    display: flex;
+    align-items: center;
+    background: var(--background-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 16px 24px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease-in-out;
+}
+.report-list li:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.report-item-link {
+    flex-grow: 1;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.report-item-link span {
+    color: var(--text-light);
+    font-size: 0.9em;
+    margin-left: 12px;
+}
+
+.report-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.download-button, .delete-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.download-button:hover, .delete-button:hover {
+    transform: translateY(-2px);
+}
+
+.download-button { background-color: var(--success-color); }
+.download-button:hover { background-color: var(--success-hover-color); }
+
+.delete-button { background-color: var(--danger-color); }
+.delete-button:hover { background-color: var(--danger-hover-color); }
+
+/* --- 5. Progress & Toast --- */
+#progress-display {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    display: none; /* Hidden by default */
+}
+#progress-display.error {
+    background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c;
+}
+#progress-display.success {
+    background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d;
+}
+
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--text-primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+.toast-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- 6. Mobile Responsiveness --- */
+@media screen and (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    .header h1 { font-size: 2em; }
+    .header p { font-size: 1em; }
+    .section-title { font-size: 1.5em; }
+    .card { padding: 20px; }
+
+    .report-list li {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+    }
+    .report-item-link {
+        margin-bottom: 16px;
+    }
+    .report-item-link span {
+        display: block;
+        margin-left: 0;
+        margin-top: 4px;
+    }
+    .report-actions {
+        margin-left: 0;
+        width: 100%;
+        /* --- NEW --- */
+        display: flex;          /* Flexbox 사용 */
+        flex-direction: column; /* 아이템을 세로로 쌓기 */
+        gap: 8px;               /* 버튼 사이의 수직 간격 */
+    }
+    .download-button, .delete-button {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        margin: 0; /* 불필요한 마진 제거 */
+        box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+    }
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -87,9 +411,143 @@
 
     <div id="toast-message" class="toast-message"></div>
 
-    <script src="{% static 'reports/js/hub_page.js' %}"></script>
-    <footer style="text-align: center; margin-top: 50px; padding: 20px; color: #6b7280; font-size: 0.9em;">
-        2025 Copyrights &copy;SPUTLAB All Rights Reserved.
-    </footer>
+    <script>
+        /* Content from hub_page.js */
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('report-generation-form');
+    const generateButton = document.getElementById('generate-report-button');
+    const progressDisplay = document.getElementById('progress-display');
+    const toastMessageDiv = document.getElementById('toast-message');
+    let progressInterval;
+
+    // Function to get CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    // Function to show toast message
+    function showToast(message, type = 'info') {
+        toastMessageDiv.textContent = message;
+        toastMessageDiv.className = 'toast-message show '; // Reset and add show class
+        if (type === 'success') {
+            toastMessageDiv.classList.add('success');
+        } else if (type === 'error') {
+            toastMessageDiv.classList.add('error');
+        }
+        setTimeout(() => {
+            toastMessageDiv.classList.remove('show');
+        }, 3000); // Hide after 3 seconds
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        generateButton.disabled = true;
+        progressDisplay.style.display = 'block';
+        progressDisplay.className = ''; // Clear previous classes
+        progressDisplay.textContent = '리포트 생성 요청 중...';
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrftoken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const taskId = data.task_id;
+                progressDisplay.textContent = data.message + ' (ID: ' + taskId + ')';
+                startPolling(taskId);
+            } else {
+                progressDisplay.classList.add('error');
+                progressDisplay.textContent = '오류: ' + data.message;
+                generateButton.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            progressDisplay.classList.add('error');
+            progressDisplay.textContent = '리포트 생성 요청 중 네트워크 오류가 발생했습니다.';
+            generateButton.disabled = false;
+        });
+    });
+
+    function startPolling(taskId) {
+        progressInterval = setInterval(() => {
+            fetch(`/get_report_progress/?task_id=${taskId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'completed') {
+                        progressDisplay.classList.add('success');
+                        progressDisplay.textContent = data.message + ' 페이지를 새로고침하여 리포트를 확인하세요.';
+                        clearInterval(progressInterval);
+                        generateButton.disabled = false;
+                        // Optionally, refresh the page or update the report list
+                        setTimeout(() => location.reload(), 2000); 
+                    } else if (data.status === 'failed') {
+                        progressDisplay.classList.add('error');
+                        progressDisplay.textContent = data.message;
+                        clearInterval(progressInterval);
+                        generateButton.disabled = false;
+                    } else {
+                        progressDisplay.textContent = data.message + ' (' + data.stage + ')';
+                    }
+                })
+                .catch(error => {
+                    console.error('Polling error:', error);
+                    progressDisplay.classList.add('error');
+                    progressDisplay.textContent = '진행 상황을 가져오는 중 오류가 발생했습니다.';
+                    clearInterval(progressInterval);
+                    generateButton.disabled = false;
+                });
+        }, 2000); // Poll every 2 seconds
+    }
+
+    // Delete Report functionality
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const reportId = this.dataset.reportId;
+            if (confirm('정말로 이 리포트를 삭제하시겠습니까?')) {
+                fetch(`/reports/${reportId}/delete/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                        'Content-Type': 'application/json' // Important for Django's CSRF to work with non-form data
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById(`report-item-${reportId}`).remove();
+                        showToast(data.message, 'success');
+                    } else {
+                        showToast('리포트 삭제 실패: ' + data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Delete error:', error);
+                    showToast('리포트 삭제 중 네트워크 오류가 발생했습니다.', 'error');
+                });
+            }
+        });
+    });
+});
+    </script>
 </body>
-</html>
