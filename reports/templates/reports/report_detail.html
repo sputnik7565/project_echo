@@ -29,6 +29,21 @@
 
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
+        .chart-grid {
+            display: flex;          /* Flexbox 레이아웃 적용 */
+            gap: 25px;              /* 차트 사이의 간격 */
+            align-items: stretch;   /* 차트들의 높이를 동일하게 맞춤 */
+        }
+
+        /* 그리드 내의 각 차트 컨테이너 설정 */
+        .chart-grid .chart-container {
+            flex: 1;                /* 사용 가능한 공간을 균등하게 차지 */
+            min-width: 0;           /* flex 아이템이 줄어들 때 깨지지 않도록 설정 */
+            
+            /* 가로로 배치될 때 높이를 적절하게 조정 (기존 450px -> 380px) */
+            height: 450px;
+        }
+
         .priority-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 1em; font-weight: 700; color: #fff; }
         .priority-1 { background-color: #be123c; }
         .priority-2 { background-color: #ea580c; }
@@ -50,6 +65,35 @@
             .chart-image { display: block !important; } /* Show Matplotlib image in print */
             .report-list, .button-group, .messages { display: none; } /* Hide UI elements not relevant for print */
         }
+        /* --- 6. Mobile Responsiveness --- */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 0px;
+            }
+            .header h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.3em; }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .chart-grid {
+                display: flex;          /* Flexbox 레이아웃 적용 */
+                gap: 25px;              /* 차트 사이의 간격 */
+                align-items: stretch;   /* 차트들의 높이를 동일하게 맞춤 */
+            }
+
+            /* 그리드 내의 각 차트 컨테이너 설정 */
+            .chart-grid .chart-container {
+                flex: 1;                /* 사용 가능한 공간을 균등하게 차지 */
+                min-width: 0;           /* flex 아이템이 줄어들 때 깨지지 않도록 설정 */
+                
+                /* 가로로 배치될 때 높이를 적절하게 조정 (기존 450px -> 380px) */
+                height: 380px;
+            }
+        }
+
+
     </style>
 </head>
 </head>
