@@ -1,14 +1,21 @@
 /* Filename: report_detail.css */
 
+/* --- 0. Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap');
+
 /* --- 1. Global & Root Variables --- */
 :root {
-    --primary-color: #606060;
-    --primary-deep-color: #1f2937;
-    --headline-bg-color: #f9f5ff;
-    --headline-text-color: #57318b;
+    /* New Unified Color Palette - Same as hub_page.css */
+    --primary-color: #3b82f6;           /* Main Blue */
+    --primary-deep-color: #1e3a8a;      /* Deep Blue for titles */
+    
+    /* Headline colors aligned with Primary color */
+    --headline-bg-color: #eef2ff;       /* Light Blue background */
+    --headline-text-color: #312e81;     /* Dark Purple/Blue text */
 
-    --priority-1-color: #fc5c65;
-    --priority-2-color: #fd9644;
+    /* Priority colors from semantic palette */
+    --priority-1-color: #ef4444;        /* Red for Priority 1 (Danger) */
+    --priority-2-color: #ea580c;        /* Orange for Priority 2 (Warning) */
 
     --text-primary: #1f2937;
     --text-secondary: #4b5563;
@@ -16,7 +23,8 @@
     --background-light: #f9fafb;
     --background-white: #ffffff;
 
-    --font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Font System Update */
+    --font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     --border-radius: 12px;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
@@ -24,9 +32,9 @@
 }
 
 @font-face {
-    font-family: 'Pretendard Variable';
-    src: url('fonts/PretendardVariable.woff2') format('woff2');
-    font-weight: 45 920;
+    font-family: 'Noto Sans KR';
+    src: url('https://fonts.gstatic.com/s/notosanskr/v20/KFOlCnqEu92Fr1Mu51QrEzAd.woff2') format('woff2');
+    font-weight: 400 800;
     font-display: swap;
 }
 

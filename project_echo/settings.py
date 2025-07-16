@@ -20,7 +20,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Nginx의 proxy_set_header X-Forwarded-Proto $scheme; 설정을 활용 /로컬에선 주석처리 
+# Nginx의 proxy_set_header X-Forwarded-Proto $scheme; 설정을 활용
 USE_X_FORWARDED_HOST = True
 # 또는 스크립트 이름을 강제로 지정
 FORCE_SCRIPT_NAME = '/echo'
@@ -125,14 +125,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
+# STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # For collectstatic
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'reports', 'static'),
 ]
 
-MEDIA_URL = '/media/'
+MEDIA_URL = FORCE_SCRIPT_NAME + '/media/'
+# MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type

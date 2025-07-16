@@ -1,27 +1,38 @@
 /* Filename: hub_page.css */
 
+/* --- 0. Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap');
+
 /* --- 1. Global & Root Variables --- */
 :root {
-    --primary-color: #a55eea;
-    --primary-hover-color: #8854d0;
-    --secondary-color: #6b7280;
-    --secondary-hover-color: #4b5563;
-    --danger-color: #fc5c65;
-    --danger-hover-color: #eb3b5a;
-    --success-color: #778ca3;
-    --success-hover-color: #4b6584;
+    /* New Unified Color Palette */
+    --primary-color: #3b82f6;           /* Main Blue */
+    --primary-hover-color: #2563eb;     /* Darker Blue for hover */
+    --secondary-color: #6b7280;         /* Neutral Gray */
+    --secondary-hover-color: #4b5563;   /* Darker Gray for hover */
+    --danger-color: #ef4444;            /* Red for Delete/Danger */
+    --danger-hover-color: #dc2626;      /* Darker Red for hover */
+    --success-color: #10b981;           /* Green for Download/Success */
+    --success-hover-color: #059669;      /* Darker Green for hover */
 
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --text-light: #6b7280;
-    --border-color: #e5e7eb;
-    --background-light: #f9fafb;
-    --background-white: #ffffff;
+    --text-primary: #1f2937;            /* Main text color (almost black) */
+    --text-secondary: #4b5563;          /* Secondary text color */
+    --text-light: #6b7280;              /* Lighter text for metadata */
+    --border-color: #e5e7eb;            /* Light gray for borders */
+    --background-light: #f9fafb;        /* Very light gray for page background */
+    --background-white: #ffffff;        /* White for cards */
 
-    --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Font System Update */
+    --font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --border-radius: 12px;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('https://fonts.gstatic.com/s/notosanskr/v20/KFOlCnqEu92Fr1Mu51QrEzAd.woff2') format('woff2');
+    font-weight: 400 800;
+    font-display: swap;
 }
 
 body {
@@ -32,6 +43,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
 }
+
 
 /* --- 2. Layout --- */
 .container {
