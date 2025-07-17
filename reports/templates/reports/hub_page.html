@@ -402,7 +402,7 @@ body {
                     <div class="report-actions">
                                                 {# <a href="{% url 'reports:report_pdf' report.id %}" class="download-button" target="_blank">PDF</a> #}
                         <a href="{% url 'reports:download_markdown_report' report.id %}" class="download-button" target="_blank">MD</a>
-                        <button class="delete-button" data-report-id="{{ report.id }}">Delete</button>
+                        <button class="delete-button" data-report-id="{{ report.id }}" data-delete-url="{% url 'reports:delete_report' report.id %}">Delete</button>
                     </div>
                 </li>
                 {% endfor %}
@@ -530,8 +530,9 @@ body {
     document.querySelectorAll('.delete-button').forEach(button => {
         button.addEventListener('click', function() {
             const reportId = this.dataset.reportId;
+            const deleteUrl = this.dataset.deleteUrl;
             if (confirm('정말로 이 리포트를 삭제하시겠습니까?')) {
-                fetch(`/reports/${reportId}/delete/`, {
+                fetch(deleteUrl, {
                     method: 'POST',
                     headers: {
                         'X-CSRFToken': csrftoken,
