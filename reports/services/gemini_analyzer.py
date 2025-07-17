@@ -68,7 +68,7 @@ You are a Chief Marketing Consultant AI for a top-tier digital agency. Your clie
   }},
 
   "performance_dashboard": {{
-    "title": "Performance Dashboard: 성과 대시보드",
+    "title": "Performance Dashboard: 현황 대시보드",
     "metrics": [
       {{
         "metric_name": "YouTube 채널 구독자",
